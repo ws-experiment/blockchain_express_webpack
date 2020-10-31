@@ -1,0 +1,44 @@
+.Input {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .LabelLine {
+    display: flex;
+    height: 20px;
+    margin: 8px 60px;
+    padding: 0px 15px;
+    align-content: center;
+  }
+  
+  .Label {
+    font-weight: bold;
+    width: 40%;
+    text-align: left;
+  }
+  
+  .ValidationError {
+    width: 70%;
+    text-align: left;
+  }
+  
+  .InputElement {
+    background-color: transparent;
+    color: whitesmoke;
+    border: 1px solid #fff;
+    width: 80%;
+    padding: 8px 20px;
+    margin: 6px 0;
+    font-size: inherit;
+  }
+  
+  .InputElement:focus {
+    outline: none;
+  }
+  
+  .Invalid {
+    border: 1px solid red;
+    background-color: salmon;
+    color:#696969;
+  }
+  

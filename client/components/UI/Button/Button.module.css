@@ -1,0 +1,71 @@
+.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    padding: 12px 32px;
+    margin: 10px ;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    border-radius: 8px;
+    transition-duration: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1mm;
+}
+
+.Button:disabled {
+    background-color: dimgray;
+    color: lightgray;
+    cursor: not-allowed;
+}
+
+.Button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.Success {
+    background-color: #5C9210;
+    color: white;
+}
+
+.Success:hover {
+    background-color: transparent;
+}
+
+.Danger {
+    background-color: #DC143C;
+    color: white;
+}
+
+.Danger:hover {
+    background-color: transparent;
+}
+
+.Info {
+    background-color: #33D4FF;
+    color: white;
+}
+
+.Info:hover {
+    background-color: transparent;
+}
+
+.Primary {
+    background-color: #3336FF;
+    color: white;
+}
+
+.Primary:hover {
+    background-color: transparent;
+}
+
+.Warning {
+    background-color: #F79F03;
+    color: white;
+}
+
+.Warning:hover {
+    background-color: transparent;
+}

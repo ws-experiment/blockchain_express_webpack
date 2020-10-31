@@ -1,0 +1,22 @@
+.Transaction {
+    padding: 1%;
+    width: 100%;
+}
+
+.Transaction .SenderLine {
+    background-color: transparent;
+    color: #e66;
+    border: 1px solid #e66;
+    padding: 8px 20px;
+    margin: 6px 0;
+    font-size: inherit;
+    text-align: center;
+}
+
+.TransactionLine {
+    display: inline-block;
+    width: 300px;
+    margin: 1px 25px;
+    text-align: left;
+}
+

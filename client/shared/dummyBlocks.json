@@ -1,0 +1,46 @@
+[
+    {
+        "timestamp": 1,
+        "lastHash": "-----",
+        "hash": "hash-one",
+        "data": [],
+        "nonce": 0,
+        "difficulty": 10
+    },
+    {
+        "timestamp": 1603724984021,
+        "lastHash": "hash-one",
+        "hash": "0078314210be3bc0ecb8ed7293ea9fb1a794fa7fc00dac168e7eb4d93e46e981",
+        "data": [
+            {
+                "id": "c8a8d22e-35a4-47b9-949c-2345426e1e19",
+                "outputMap": {
+                    "0428729771e0a6a0ede25b71d8b4ac59c6f98ad0f90221b350a7bc423f70684f591c96a272d45c8a4f99a16e64eb64f8fc2ddf0d69d5666fa608251328fb55b479": 91,
+                    "0404547eafab323d74ed9319bf6e30b71a2e6f1c8360867057cb80bfc244ae12a82b4405aa037a37a9fc09d44edda0f0f4e6251a8f1b16dc0caee3530c7414edd8": 4,
+                    "local002": 5
+                },
+                "input": {
+                    "timestamp": 1603724973714,
+                    "amount": 100,
+                    "address": "0428729771e0a6a0ede25b71d8b4ac59c6f98ad0f90221b350a7bc423f70684f591c96a272d45c8a4f99a16e64eb64f8fc2ddf0d69d5666fa608251328fb55b479",
+                    "signature": {
+                        "r": "c554404db53a9b5b6ea3c0bf0a056f36834ae8fca9046182ad863f8b52220bc9",
+                        "s": "eb4107fc71514fc10b0df4f401d3a354e38b30ce082fb2298de75af72c5f08ea",
+                        "recoveryParam": 0
+                    }
+                }
+            },
+            {
+                "id": "86172deb-9600-47a6-acc8-a61e937ddf5d",
+                "outputMap": {
+                    "0428729771e0a6a0ede25b71d8b4ac59c6f98ad0f90221b350a7bc423f70684f591c96a272d45c8a4f99a16e64eb64f8fc2ddf0d69d5666fa608251328fb55b479": 20
+                },
+                "input": {
+                    "address": "*authorized-reward*"
+                }
+            }
+        ],
+        "nonce": 368,
+        "difficulty": 9
+    }
+]

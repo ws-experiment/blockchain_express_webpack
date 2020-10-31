@@ -1,0 +1,57 @@
+{
+  "name": "blockchain_production",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "rimraf dist && webpack --config webpack.config.production.js && node ./server/index.js",
+    "dev-client": "webpack serve --config webpack.config.js",
+    "dev-server": "cross-env ENV='DEVELOPMENT' nodemon ./server/index.js",
+    "dev-server-peer": "cross-env HTTP_PORT='3001' nodemon ./server/index.js",
+    "dev-server-peer2": "cross-env HTTP_PORT='3002' nodemon ./server/index.js",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "browserslist": "> 1%, last 2 versions",
+  "devDependencies": {
+    "jest": "^26.5.2",
+    "nodemon": "^2.0.4",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-stage-2": "^7.8.3",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
+    "body-parser": "^1.19.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^5.0.0",
+    "elliptic": "^6.5.3",
+    "express": "^4.17.1",
+    "file-loader": "^6.1.1",
+    "hex-to-binary": "^1.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "postcss-loader": "^3.0.0",
+    "pubnub": "^4.29.9",
+    "react": "^17.0.1",
+    "react-copy-to-clipboard": "^5.0.2",
+    "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-tooltip": "^4.2.10",
+    "rimraf": "^3.0.2",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "uuid": "^8.3.1",
+    "webpack": "^5.2.0",
+    "webpack-cli": "^4.1.0"
+  }
+}
