@@ -7,8 +7,8 @@
     "start": "rimraf dist && webpack --config webpack.config.production.js && node ./server/index.js",
     "dev-client": "webpack serve --config webpack.config.js",
     "dev-server": "cross-env ENV='DEVELOPMENT' nodemon ./server/index.js",
-    "dev-server-peer": "cross-env HTTP_PORT='3001' nodemon ./server/index.js",
-    "dev-server-peer2": "cross-env HTTP_PORT='3002' nodemon ./server/index.js",
+    "dev-server-peer": "cross-env ENV='DEVELOPMENT' HTTP_PORT='3001' nodemon ./server/index.js",
+    "dev-server-peer2": "cross-env ENV='DEVELOPMENT' HTTP_PORT='3002' nodemon ./server/index.js",
     "test": "jest --watchAll"
   },
   "jest": {

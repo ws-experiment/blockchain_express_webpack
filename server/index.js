@@ -9,24 +9,13 @@ const Wallet = require("./wallet/wallet");
 const TransactionMiner = require("./wallet/transaction-miner");
 
 const { DEFAULT_HTTP_PORT } = require("./config");
-
-const HTTP_PORT = process.env.PORT || process.env.HTTP_PORT || DEFAULT_HTTP_PORT;
+const HTTP_PORT =
+  process.env.PORT || process.env.HTTP_PORT || DEFAULT_HTTP_PORT;
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
-const pubsub = new PubSub({
-  blockchain,
-  currentHttpPort: HTTP_PORT,
-  transactionPool,
-  wallet,
-});
-const transactionMiner = new TransactionMiner({
-  blockchain,
-  transactionPool,
-  wallet,
-  pubsub,
-});
+
 const app = express();
 
 //#region Run client code
@@ -36,15 +25,11 @@ const HTML_FILE = path.join(DIST_DIR, "index.html");
 app.use(express.static(DIST_DIR));
 //#endregion Run client code
 
+//#region APIs
+
 //using the body parser middleware
 app.use(bodyParser.json());
 
-/**
- * test function of broadcastChain
- */
-//setTimeout(() => pubsub.broadcastChain(), 1000);
-
-//#region APIs
 app.get("/api/blocks", (req, res) => {
   res.json(blockchain.chain);
 });
@@ -90,6 +75,7 @@ app.post("/api/transact", (req, res) => {
 
   try {
     if (transaction) {
+      console.log("[transaction]", transaction);
       transaction.update({ senderWallet: wallet, recipient, amount });
     } else {
       transaction = wallet.createTransaction({
@@ -155,60 +141,74 @@ const syncOtherChains = () => {
   pubsub.syncChainSignal();
 };
 
-//#region GENERATE DUMMY Transactions
-if (process.env.ENV === "DEVELOPMENT") {
-  const walletFoo = new Wallet();
-  const walletBar = new Wallet();
-
-  const generateWalletTransaction = ({ wallet, recipient, amount }) => {
-    const transaction = wallet.createTransaction({
-      recipient,
-      amount,
-      chain: blockchain.chain,
-    });
-
-    transactionPool.setTransaction(transaction);
-  };
-
-  const walletAction = () =>
-    generateWalletTransaction({
-      wallet,
-      recipient: walletFoo.publicKey,
-      amount: 5,
-    });
-
-  const walletFooAction = () =>
-    generateWalletTransaction({
-      wallet: walletFoo,
-      recipient: walletBar.publicKey,
-      amount: 10,
-    });
-
-  const walletBarAction = () =>
-    generateWalletTransaction({
-      wallet: walletBar,
-      recipient: wallet.publicKey,
-      amount: 15,
-    });
-
-  for (let i = 0; i < 10; i++) {
-    if (i % 3 === 0) {
-      walletAction();
-      walletFooAction();
-    } else if (i % 3 === 1) {
-      walletAction();
-      walletBarAction();
-    } else {
-      walletFooAction();
-      walletBarAction();
-    }
-    transactionMiner.mineTransactions();
-  }
-}
-//#endregion DUMMY Transactions
-
 //listen to http server
-app.listen(HTTP_PORT, () => {
+var httpServer = app.listen(HTTP_PORT, () => {
   console.log(`listening HTTP at localhost:${HTTP_PORT}`);
   syncOtherChains();
 });
+
+const pubsub = new PubSub({
+  blockchain,
+  currentHttpPort: HTTP_PORT,
+  transactionPool,
+  wallet,
+  httpServer,
+});
+const transactionMiner = new TransactionMiner({
+  blockchain,
+  transactionPool,
+  wallet,
+  pubsub,
+});
+
+//#region GENERATE DUMMY Transactions
+// if (process.env.ENV === "DEVELOPMENT") {
+//   const walletFoo = new Wallet();
+//   const walletBar = new Wallet();
+
+//   const generateWalletTransaction = ({ wallet, recipient, amount }) => {
+//     const transaction = wallet.createTransaction({
+//       recipient,
+//       amount,
+//       chain: blockchain.chain,
+//     });
+
+//     transactionPool.setTransaction(transaction);
+//   };
+
+//   const walletAction = () =>
+//     generateWalletTransaction({
+//       wallet,
+//       recipient: walletFoo.publicKey,
+//       amount: 5,
+//     });
+
+//   const walletFooAction = () =>
+//     generateWalletTransaction({
+//       wallet: walletFoo,
+//       recipient: walletBar.publicKey,
+//       amount: 10,
+//     });
+
+//   const walletBarAction = () =>
+//     generateWalletTransaction({
+//       wallet: walletBar,
+//       recipient: wallet.publicKey,
+//       amount: 15,
+//     });
+
+//   for (let i = 0; i < 10; i++) {
+//     if (i % 3 === 0) {
+//       walletAction();
+//       walletFooAction();
+//     } else if (i % 3 === 1) {
+//       walletAction();
+//       walletBarAction();
+//     } else {
+//       walletFooAction();
+//       walletBarAction();
+//     }
+//     transactionMiner.mineTransactions();
+//   }
+// }
+//#endregion DUMMY Transactions

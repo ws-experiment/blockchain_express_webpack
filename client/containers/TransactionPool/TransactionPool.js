@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Transaction } from "../../components";
 import classes from "./TransactionPool.module.css";
-
-const POLL_INTERVAL_MS = 5 * 1000; //10 seconds
+import WebSocketClient from "../../shared/websocket-client";
 
 const TransactionPool = (props) => {
   const [transactionPoolMap, setTransactionPoolMap] = useState({});
+  const HOST =
+    process.env.ENV === "PRODUCTION"
+      ? document.location.origin.replace(/^http/, "ws")
+      : "ws://localhost:3001";
 
   const fetchTransactionPoolMap = () => {
     fetch(`api/transaction-pool-map`)
@@ -29,11 +32,11 @@ const TransactionPool = (props) => {
   useEffect(() => {
     fetchTransactionPoolMap();
 
-    const interval = setInterval(() => {
-      fetchTransactionPoolMap();
-    }, POLL_INTERVAL_MS);
-
-    return () => clearInterval(interval);
+    const client = new WebSocketClient(HOST);
+    client.connect(fetchTransactionPoolMap);
+    return () => {
+      client.close();
+    };
   }, []);
 
   const transactionData =

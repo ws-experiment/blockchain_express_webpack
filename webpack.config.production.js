@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 const path = require("path");
 const autoprefixer = require("autoprefixer");
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -33,7 +34,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               importLoaders: 1,
-              modules: true
+              modules: true,
             },
           },
           {
@@ -50,7 +51,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               limit: 8192,
             },
@@ -60,6 +61,9 @@ module.exports = {
     ],
   },
   plugins: [
-    htmlPlugin
+    htmlPlugin,
+    new webpack.DefinePlugin({
+      "process.env.ENV": JSON.stringify("PRODUCTION"),
+    }),
   ],
 };

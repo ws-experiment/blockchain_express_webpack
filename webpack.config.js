@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 const path = require("path");
 const autoprefixer = require("autoprefixer");
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -6,21 +7,20 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: "./index.html",
 });
 
-
 module.exports = {
   mode: "development",
   entry: "./client/index.js",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: './dist',
-    publicPath: '',
+    contentBase: "./dist",
+    publicPath: "",
     proxy: {
-      '/api' : 'http://localhost:3000' 
-    }                                            
+      "/api": "http://localhost:3001",
+    },
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -42,7 +42,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               importLoaders: 1,
-              modules: true
+              modules: true,
             },
           },
           {
@@ -59,7 +59,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: "url-loader",
             options: {
               limit: 8192,
             },
@@ -70,5 +70,10 @@ module.exports = {
   },
   plugins: [
     htmlPlugin,
+    new webpack.DefinePlugin({
+      "process.env.ENV": JSON.stringify(
+        "DEVELOPMENT"
+      ),
+    }),
   ],
 };
