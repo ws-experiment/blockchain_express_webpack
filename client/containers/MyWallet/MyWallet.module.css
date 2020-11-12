@@ -1,6 +1,8 @@
 .MyWallet {
     font-size: large;
     align-items: center;
+    width: 60%;
+    margin: 20px auto;
 }
 
 .MyWallet .WalletInfo {
@@ -9,7 +11,7 @@
     word-wrap: break-word;
     border: 1px solid #fff;
     padding: 5%;
-    margin: 2%;
+    margin: auto;
 }
 
 

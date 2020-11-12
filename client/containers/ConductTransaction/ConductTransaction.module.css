@@ -1,9 +1,17 @@
 .ConductTransaction {
-    margin: 10%;
-    align-items: center;
-    background-color: transparent;
+    margin: 20px auto;
     border: 1px solid #fff;
-    width: 80%;
+    width: 50%;
+    padding: 20px 0;
+    -ms-transform: translateY(10%);
+    transform: translateY(10%);
   }
   
   
+.RecipientRadioButton {
+  display: flex;
+  width: 60%;
+  margin: 15px auto;
+  padding: 10px;
+ justify-content: space-between;  
+}

@@ -82,6 +82,7 @@ class PubSub {
            * When new node is initialized,
            * broadcast the chains and transactions across the network
            */
+          
           case CHANNELS.SYNC_CHAIN_SIGNAL:
             this.broadcastData();
             break;

@@ -1,24 +1,26 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-
 /**
  * elementType= input|textarea|select
- * 
+ *
  * https://www.w3schools.com/html/html_form_input_types.asp
  * [elementConfig]type= button|checkbox|color|date|datetime-local|email|file|hidden|image
  *                      |month|number|password|radio|range|reset|search|submit|tel|text
  *                      |time|url|week
- * 
+ *
  * validation: [required]|[minLength]|[maxLength]|[isEmail]
  */
-
 
 const Input = (props) => {
   let inputElement = null;
   const inputClasses = [classes.InputElement];
-
+  const inputClassesContainer = [classes.Input];
   let validationError = null;
+
+  if(!props.show){
+    inputClassesContainer.push(classes.Hidden);
+  }
 
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
@@ -57,7 +59,7 @@ const Input = (props) => {
     case "select":
       inputElement = (
         <select
-          className={classes.InputElement}
+          className={classes.SelectItems}
           value={props.value}
           onChange={props.changed}
         >
@@ -80,8 +82,9 @@ const Input = (props) => {
         />
       );
   }
+
   return (
-    <div className={classes.Input}>
+    <div className={inputClassesContainer.join(" ")}>
       <div className={classes.LabelLine}>
         <label className={classes.Label}>{props.label}</label>
         {validationError}

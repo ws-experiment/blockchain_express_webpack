@@ -22,8 +22,8 @@ const MyWallet = (props) => {
 
   return (
     <div className={classes.MyWallet}>
-      <Logo height={"200px"} image={onegaiLogo} />
-      <h1>Welcome to Onegai Blockchain</h1>
+      <Logo height={"150px"} image={onegaiLogo} />
+      <h2>Welcome to Onegai Blockchain</h2>
       <br />
       <div className={classes.WalletInfo}>
         <div>My Public Address</div>

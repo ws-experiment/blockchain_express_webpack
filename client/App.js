@@ -13,10 +13,10 @@ import { Layout } from "./hoc";
 const App = () => {
   let routes = (
     <Switch>
-      <Route path="/" exact component={MyWallet} />
       <Route path="/blocks" component={Blocks} />
       <Route path="/conduct-transaction" component={ConductTransaction} />
       <Route path="/transaction-pool" component={TransactionPool} />
+      <Route path="/" exact component={MyWallet} />
       <Redirect to="/" />
     </Switch>
   );
